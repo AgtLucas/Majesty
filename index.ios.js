@@ -12,19 +12,30 @@ import React, {
   View
 } from 'react-native'
 
+import Realm from 'realm'
+
 class Majesty extends Component {
   render () {
+    var realm = new Realm({
+      schema: [{
+        name: 'Cat',
+        properties: {
+          name: 'string'
+        }
+      }]
+    })
+
+    realm.write(() => {
+      realm.create('Cat', ['Lynx'])
+    })
+
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
         <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
+          Count of Cats in Realm: {realm.objects('Cat').length}
         </Text>
       </View>
     )
