@@ -1,0 +1,3 @@
+rootProject.name = 'Majesty'
+
+include ':app'
